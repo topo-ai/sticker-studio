@@ -1,0 +1,10 @@
+{
+  "name": "generic-authoring",
+  "platform": null,
+  "route": "generic",
+  "spec_status": "not_platform_specific",
+  "size": [512, 512],
+  "max_bytes": null,
+  "transparent": true,
+  "loop": true
+}

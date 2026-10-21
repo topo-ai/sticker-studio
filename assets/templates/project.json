@@ -1,0 +1,12 @@
+{
+  "schema_version": 2,
+  "name": "",
+  "theme": "",
+  "mode": "animated",
+  "count": 6,
+  "style": "chibi-ink",
+  "stage": "planned",
+  "required_formats": ["gif", "webp"],
+  "platforms": [],
+  "publish_authorization": "not_requested"
+}

@@ -1,0 +1,5 @@
+{
+  "schema_version": 2,
+  "items": {},
+  "instructions": "Each item needs file_hashes keyed by export relative path; checks identity/anatomy/caption/motion/loop/edges, each pass or pending/fail; method and evidence. Do not auto-pass."
+}

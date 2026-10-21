@@ -1,0 +1,15 @@
+{
+  "schema_version": 2,
+  "grid": [4, 2],
+  "typography": {
+    "layout_mode": null,
+    "font_file": null,
+    "font_weight": null,
+    "palette": [],
+    "outline": [],
+    "size_hierarchy": [],
+    "safe_area": null,
+    "text_motion_default": "static"
+  },
+  "items": []
+}

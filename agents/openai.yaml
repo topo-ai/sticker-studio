@@ -1,0 +1,4 @@
+interface:
+  display_name: "表情包工作室"
+  short_description: "从形象与主题策划，到静动态表情创作、平台适配、投稿和发布复盘"
+  default_prompt: "使用 $sticker-studio，根据我的形象素材策划并制作一套表情包，选择静态或动态，并准备微信和抖音的发布物料。"

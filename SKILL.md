@@ -2,7 +2,7 @@
 name: sticker-studio
 description: 基于人物、宠物或原创形象设计静态与动态表情套系，完成角色设定、主题策划、动作分镜、参考图生成、切帧编码、质量验收、微信/抖音发布物料及授权范围内的投稿发布。适用于IP表情包、GIF贴纸和表情系列生产，不用于仅从表情库选图回复。
 metadata:
-  version: 2.2.4
+  version: 2.2.5
 ---
 
 # 表情包工作室
@@ -24,7 +24,7 @@ metadata:
 | 媒体处理 | [媒体管线](references/technical/media-pipeline.md) | 对齐帧、GIF/WebP/PNG、接触表与参数报告 |
 | 质检与返工 | [验收](references/workflows/05-quality.md)、[故障诊断](references/technical/failure-recovery.md) | 文件通过 + 与文件哈希绑定的视觉审阅 |
 | 平台适配 | [平台入口](references/platforms/index.md) → 指定平台文档 | 当前入口规格证据、对应文件、投稿文案 |
-| 打包与发布 | [交付发布](references/workflows/06-delivery-publishing.md) | 完整包、提交回执；不把待审核称为上架 |
+| 交付与发布 | [交付发布](references/workflows/06-delivery-publishing.md) | 完整输出文件夹、提交回执；不把待审核称为上架 |
 | 续作与复盘 | [项目契约](references/technical/contracts.md) | 精确失效范围、版本和下一期建议 |
 
 各层职责与验收边界见 [系统架构](references/technical/architecture.md)。需要验收整个 Skill 时读 [行为评估](evals/scenarios.md)，运行本地测试，不把结构校验当效果验证。
@@ -46,6 +46,10 @@ metadata:
 
 制作前从原参考提取并记录可见识别点；用户选定风格后，原参考负责身份，风格母版负责绘制方式；用户认可长相不等于允许改变已选画风，后续明确选定的版本优先；用户认可长相不等于允许改变已选画风，后续明确选定的版本优先，每条生成都回到这两类依据，不仅沿用上一张生成图。静态、动态各帧及夸张表情均检查角色辨识度；出现脸型、五官或关键特征漂移时返工，不将其当成风格差异放行。用户明确指定的变形、简化或重新设计要求优先，仅在该范围内放宽。
 
+## 默认交付形式
+
+默认交付整理好的输出文件夹，不自动生成 ZIP 或其他压缩包。只有用户明确要求打包时才额外生成压缩包；文件夹交付仍须完成文件检查与视觉验收。
+
 ## 交付命名与含义词
 
 表情成品统一使用“编号-中文表情名.扩展名”，例如 `01-收到.gif`、`01-收到.webp`；同一条表情跨格式、尺寸保持相同编号与名称，尺寸和平台通过目录区分。每套同时准备逐张含义词，并与文件名对应。详细规则见 [交付发布](references/workflows/06-delivery-publishing.md)。
@@ -62,6 +66,7 @@ python scripts/prepare_frames.py --sheet SHEET.png --cols 4 --rows 2 --size 512 
 python scripts/sticker_media.py assemble --frames PROJECT/frames/01/v001/frames --output PROJECT/exports/generic/01.gif --frame-ms 160
 python scripts/sticker_media.py assemble --frames PROJECT/frames/01/v001/frames --output PROJECT/exports/generic/01.webp --frame-ms 160
 python scripts/studio.py verify --project PROJECT
+# 仅用户明确要求压缩包时运行：
 python scripts/studio.py package --project PROJECT --output DELIVERY.zip
 ```
 
@@ -75,4 +80,4 @@ init 仅创建可填写的真实项目结构，不生成表情。compile 需要�
 
 每条表情：planned → designed → frames_ready → encoded → reviewed。每个目标平台独立记录 prepared / ready_to_submit / submitted / live / needs_revision / blocked。状态推进必须有对应产物；修改母版、动作、文字或输出文件时使相关审阅失效。
 
-最终答复给代表动态预览、独立文件/ZIP、已完成数量和未完成事项。用户只要设计时不要偷偷生产；用户要整套时不要只给策划。禁止以“大体完成”掩盖缺文件、假透明或单帧 GIF。
+最终答复给代表动态预览、输出文件夹与独立文件链接（仅用户明确要求时提供 ZIP）、已完成数量和未完成事项。用户只要设计时不要偷偷生产；用户要整套时不要只给策划。禁止以“大体完成”掩盖缺文件、假透明或单帧 GIF。
